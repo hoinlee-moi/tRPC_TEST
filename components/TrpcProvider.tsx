@@ -10,7 +10,7 @@ export function TrpcProvider({ children }: PropsWithChildren) {
     trpc.createClient({
       links: [
         httpBatchLink({
-          url: "http://localhost:3000/api/trpc",
+          url: "https://next-prac-m1w8.vercel.app/api/trpc",
         }),
       ],
     })
