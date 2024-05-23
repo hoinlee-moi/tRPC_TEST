@@ -4,7 +4,8 @@ import { trpc } from "@/server/client";
 
 export default function Board() {
   const res = trpc.post.getPost.useQuery().data;
-  const posts = JSON.parse(res || "");
+
+  const posts = (res && JSON.parse(res)) || [];
   return (
     <div>
       {posts.map(({ title, content }: { title: string; content: string }) => (
