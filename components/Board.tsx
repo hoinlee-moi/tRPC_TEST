@@ -3,11 +3,11 @@
 import { trpc } from "@/server/client";
 
 export default function Board() {
-  const posts = trpc.post.getPost.useQuery().data;
-
+  const res = trpc.post.getPost.useQuery().data;
+  const posts = JSON.parse(res || "");
   return (
     <div>
-      {posts?.map(({ title, content }) => (
+      {posts.map(({ title, content }: { title: string; content: string }) => (
         <div
           key={Math.random()}
           className="flex flex-col border border-solid border-blue-400 mb-3 p-2"

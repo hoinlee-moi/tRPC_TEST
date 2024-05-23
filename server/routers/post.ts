@@ -11,7 +11,7 @@ const TESTDUMMY = [
 
 export const postRouter = router({
   getPost: procdure.query(() => {
-    return TESTDUMMY;
+    return JSON.stringify(TESTDUMMY);
   }),
   addPost: procdure
     .input(z.object({ title: z.string(), content: z.string() }))
