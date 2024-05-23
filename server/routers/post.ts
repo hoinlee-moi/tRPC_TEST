@@ -3,24 +3,31 @@ import { procdure, router } from "../trpc";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
+const TESTDUMMY = [
+  { title: "trpctest1", content: "dkfnekfndk" },
+  { title: "trpctest2", content: "ttttest2" },
+  { title: "trpctest3", content: "dkfnekfndk" },
+];
 
 export const postRouter = router({
-  getPost: procdure.query(async () => {
-    return await prisma.post.findMany();
+  getPost: procdure.query(() => {
+    return TESTDUMMY;
   }),
   addPost: procdure
     .input(z.object({ title: z.string(), content: z.string() }))
-    .mutation(async (opts) => {
+    .mutation((opts) => {
       const { input } = opts;
       console.log(input);
       if (!input.title || !input.content) return;
 
-      await prisma.post.create({
-        data: {
-          title: input.title,
-          content: input.content,
-        },
-      });
+      TESTDUMMY.push({ title: input.title, content: input.content });
+
+      //  prisma.post.create({
+      //   data: {
+      //     title: input.title,
+      //     content: input.content,
+      //   },
+      // });
       // TODO : Call prisma add user method
     }),
 });
